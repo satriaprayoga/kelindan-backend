@@ -6,6 +6,8 @@ import (
 	"kelindan/pkg/logging"
 	"kelindan/pkg/settings"
 	"kelindan/pkg/utils"
+
+	repokuser "kelindan/repository/k_user"
 )
 
 func init() {
@@ -26,6 +28,17 @@ func main() {
 	}
 
 	claims, err := utils.ParseToken(token)
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Println("claims: ", *claims)
+
+	repoUser := repokuser.NewRepoKUser(database.Conn)
+
+	kuser, err_ := repoUser.GetByID(1)
+	if err_ != nil {
+		fmt.Println(err_)
+	}
+	fmt.Printf("%v", kuser)
 
 }

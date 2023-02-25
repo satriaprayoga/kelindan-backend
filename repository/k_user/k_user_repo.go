@@ -110,3 +110,71 @@ func (db *repoKUser) Create(data *models.KUser) error {
 	}
 	return nil
 }
+
+func (db *repoKUser) Update(ID int, data interface{}) error {
+	var (
+		logger = logging.Logger{}
+		err    error
+	)
+	query := db.Conn.Model(models.KUser{}).Where("user_id=?", ID).Updates(data)
+	logger.Query(fmt.Sprintf("%v", query))
+	err = query.Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (db *repoKUser) Delete(ID int) error {
+	var (
+		logger = logging.Logger{}
+		err    error
+	)
+	query := db.Conn.Where("user_id=?", ID).Delete(&models.KUser{})
+	logger.Query(fmt.Sprintf("%v", query))
+	err = query.Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (db *repoKUser) UpdatePasswordByEmail(Email string, Password string) error {
+	var (
+		logger = logging.Logger{}
+		err    error
+	)
+	query := db.Conn.Exec(`UPDATE kuser set password =? where user_type IN ('user') AND email =?`, Password, Email)
+	logger.Query(fmt.Sprintf("%v", query)) //cath to log query string
+	err = query.Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (db *repoKUser) Count(queryparam models.ParamList) (result int, err error) {
+	var (
+		qWhere        = ""
+		logger        = logging.Logger{}
+		_result int64 = 0
+	)
+
+	//Where
+	if queryparam.InitSearch != "" {
+		qWhere = queryparam.InitSearch
+	}
+	if queryparam.Search != "" {
+		if qWhere != "" {
+			qWhere += " and " + queryparam.Search
+		}
+	}
+
+	query := db.Conn.Model(&models.KUser{}).Where(qWhere).Count(&_result)
+	logger.Query(fmt.Sprintf("%v", query))
+	err = query.Error
+	if err != nil {
+		return 0, err
+	}
+	return int(_result), nil
+}

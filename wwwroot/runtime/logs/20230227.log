@@ -1,0 +1,14 @@
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:17:32 &{0xc000190630 ERROR: column "Model" of relation "k_user" does not exist (SQLSTATE 42703) 0 0xc0003701c0 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:21:00 &{0xc000188630 ERROR: column "Model" of relation "k_user" does not exist (SQLSTATE 42703) 0 0xc000383500 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:21:21 &{0xc0001886c0 ERROR: column "Model" of relation "k_user" does not exist (SQLSTATE 42703) 0 0xc00034aa80 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:25:08 &{0xc0001ba6c0 ERROR: column "Model" of relation "k_user" does not exist (SQLSTATE 42703) 0 0xc0000d0c40 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:28:24 &{0xc000190630 ERROR: column "Model" of relation "k_user" does not exist (SQLSTATE 42703) 0 0xc0002b3340 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:35:56 &{0xc000190630 <nil> 1 0xc0002af880 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:36:36 &{0xc0001ba630 <nil> 1 0xc0000d5340 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:42:39 &{0xc0001886c0 <nil> 1 0xc00036aa80 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:46:01 &{0xc000188630 <nil> 1 0xc000336700 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:49:55 &{0xc0001ba630 <nil> 1 0xc0000d2a80 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:50:57 &{0xc000230630 <nil> 1 0xc000382000 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:53:29 &{0xc000232630 <nil> 1 0xc0000cca80 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:54:14 &{0xc0001886c0 <nil> 1 0xc00040ae00 0}
+[QUERY][(*repoKUser)][k_user_repo.go:120]2023/02/27 00:55:00 &{0xc000190630 <nil> 1 0xc00037ac40 0}

@@ -3,7 +3,6 @@ package iuser
 import (
 	"context"
 	"kelindan/models"
-	"kelindan/pkg/utils"
 )
 
 type Repository interface {
@@ -18,5 +17,7 @@ type Repository interface {
 }
 
 type Usecase interface {
-	GetByID(ctx context.Context, Claims utils.Claims, ID int) (result interface{}, err error)
+	GetByID(ctx context.Context, ID int) (result interface{}, err error)
+	Create(ctx context.Context, data *models.KUser) error
+	Update(ctx context.Context, ID int, data models.UpdateUser) (err error)
 }

@@ -1,13 +1,16 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"kelindan/models"
 	"kelindan/pkg/database"
 	"kelindan/pkg/logging"
 	"kelindan/pkg/settings"
-	"kelindan/pkg/utils"
+	"time"
 
 	repokuser "kelindan/repository/k_user"
+	usekuser "kelindan/usecase/k_user"
 )
 
 func init() {
@@ -19,26 +22,23 @@ func init() {
 
 func main() {
 
-	fmt.Println(settings.AppConfigSetting.Server.RunMode)
-	token, err := utils.GenerateToken(1, "test", "type1")
-	if err != nil {
-		fmt.Println("error generate token")
-	} else {
-		fmt.Printf("token : %v", token)
-	}
-
-	claims, err := utils.ParseToken(token)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("claims: ", *claims)
-
+	timeOutCtx := time.Duration(settings.AppConfigSetting.Server.ReadTimeOut) * time.Second
 	repoUser := repokuser.NewRepoKUser(database.Conn)
+	useUser := usekuser.NewUseKUser(repoUser, timeOutCtx)
 
-	kuser, err_ := repoUser.GetByID(1)
+	updateUser := models.UpdateUser{
+		UserName: "john32",
+		Name:     "john tulang",
+		Telp:     "08131222102",
+		Email:    "john31@gmail.com",
+		UserType: "editor",
+	}
+
+	err_ := useUser.Update(context.Background(), 1, updateUser)
 	if err_ != nil {
 		fmt.Println(err_)
+	} else {
+		fmt.Printf("OK")
 	}
-	fmt.Printf("%v", kuser)
 
 }

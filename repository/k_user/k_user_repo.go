@@ -144,7 +144,7 @@ func (db *repoKUser) UpdatePasswordByEmail(Email string, Password string) error 
 		logger = logging.Logger{}
 		err    error
 	)
-	query := db.Conn.Exec(`UPDATE kuser set password =? where user_type IN ('user') AND email =?`, Password, Email)
+	query := db.Conn.Exec(`UPDATE k_user set password =? where user_type IN ('user') AND email =?`, Password, Email)
 	logger.Query(fmt.Sprintf("%v", query)) //cath to log query string
 	err = query.Error
 	if err != nil {

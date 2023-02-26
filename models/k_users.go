@@ -11,3 +11,11 @@ type KUser struct {
 	UserType string `json:"user_type" gorm:"type:varchar(10)"`
 	Model
 }
+
+type UpdateUser struct {
+	UserName string `json:"user_name"`
+	Name     string `json:"name"`
+	Telp     string `json:"telp"`
+	Email    string `json:"email"`
+	UserType string `json:"user_type"`
+}

@@ -70,3 +70,14 @@ func (u *useKUser) Update(ctx context.Context, ID int, data models.UpdateUser) (
 	}
 	return nil
 }
+
+func (u *useKUser) Delete(ctx context.Context, ID int) (err error) {
+	ctx, cancel := context.WithTimeout(ctx, u.contextTimeOut)
+	defer cancel()
+
+	err = u.repoKuser.Delete(ID)
+	if err != nil {
+		return err
+	}
+	return nil
+}

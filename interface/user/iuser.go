@@ -20,4 +20,5 @@ type Usecase interface {
 	GetByID(ctx context.Context, ID int) (result interface{}, err error)
 	Create(ctx context.Context, data *models.KUser) error
 	Update(ctx context.Context, ID int, data models.UpdateUser) (err error)
+	Delete(ctx context.Context, ID int) (err error)
 }

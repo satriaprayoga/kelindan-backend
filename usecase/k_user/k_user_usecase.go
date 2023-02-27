@@ -41,6 +41,17 @@ func (u *useKUser) GetByID(ctx context.Context, ID int) (result interface{}, err
 	return response, nil
 }
 
+func (u *useKUser) GetByEmailKUser(ctx context.Context, email string, usertype string) (result models.KUser, err error) {
+	ctx, cancel := context.WithTimeout(ctx, u.contextTimeOut)
+	defer cancel()
+
+	a := models.KUser{}
+	result, err = u.repoKuser.GetByAccount(email, usertype)
+	if err != nil {
+		return a, err
+	}
+	return result, nil
+}
 func (u *useKUser) Create(ctx context.Context, data *models.KUser) (err error) {
 	ctx, cancel := context.WithTimeout(ctx, u.contextTimeOut)
 	defer cancel()

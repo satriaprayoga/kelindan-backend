@@ -19,3 +19,9 @@ type UpdateUser struct {
 	Email    string `json:"email"`
 	UserType string `json:"user_type"`
 }
+
+type ChangePassword struct {
+	OldPassword     string `json:"old_password" valid:"Required"`
+	NewPassword     string `json:"new_password" valid:"Required"`
+	ConfirmPassword string `json:"confirm_password" valid:"Required"`
+}

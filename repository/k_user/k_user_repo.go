@@ -139,12 +139,12 @@ func (db *repoKUser) Delete(ID int) error {
 	return nil
 }
 
-func (db *repoKUser) UpdatePasswordByEmail(Email string, Password string) error {
+func (db *repoKUser) UpdatePasswordByEmail(Email string, Password string, UserType string) error {
 	var (
 		logger = logging.Logger{}
 		err    error
 	)
-	query := db.Conn.Exec(`UPDATE k_user set password =? where user_type IN ('user') AND email =?`, Password, Email)
+	query := db.Conn.Exec(`UPDATE k_user set password =? where user_type IN ('?') AND email =?`, Password, UserType, Email)
 	logger.Query(fmt.Sprintf("%v", query)) //cath to log query string
 	err = query.Error
 	if err != nil {

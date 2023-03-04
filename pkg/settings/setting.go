@@ -43,10 +43,19 @@ type Database struct {
 	TablePrefix string `mapstructure:"table_prefix"`
 }
 
+type RedisDB struct {
+	Host     string `mapstructure:"host"`
+	Port     string `mapstructure:"port"`
+	DB       int    `mapstructure:"db"`
+	Key      string `mapstructure:"key"`
+	Password string `mapstructure:"password"`
+}
+
 type FileConfig struct {
 	Server   *Server   `mapstructure:"server"`
 	App      *App      `mapstructure:"app"`
 	Database *Database `mapstructure:"database"`
+	RedisDB  *RedisDB  `mapstructure:"redisdb"`
 }
 
 var AppConfigSetting = &FileConfig{}

@@ -33,5 +33,13 @@
         "password": "asdqwe123",
         "name": "kelindan",
         "table_prefix": ""
+    },
+    "redisdb":{
+        "host":"127.0.0.1",
+        "port":6379,
+        "db":0,
+        "key":"ka_email",
+        "password":""
     }
+
 }

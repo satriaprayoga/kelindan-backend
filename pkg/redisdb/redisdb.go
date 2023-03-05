@@ -43,3 +43,11 @@ func GetSession(key string) interface{} {
 	fmt.Println(value)
 	return value
 }
+
+func TruncateList(key string) error {
+	_, err := rdb.Del(key).Result()
+	if err != nil {
+		return err
+	}
+	return nil
+}

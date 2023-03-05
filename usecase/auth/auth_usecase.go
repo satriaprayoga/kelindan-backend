@@ -21,6 +21,15 @@ func NewUseAuth(a iuser.Repository, timeout time.Duration) iauth.Usecase {
 	return &useAuth{repoKUser: a, contextTimeOut: timeout}
 }
 
+func (u *useAuth) Logout(ctx context.Context, Claims utils.Claims, Token string) (err error) {
+	ctx, cancel := context.WithTimeout(ctx, u.contextTimeOut)
+	defer cancel()
+
+	redisdb.TruncateList(Token)
+
+	return nil
+}
+
 func (u *useAuth) Login(ctx context.Context, dataLogin *models.LoginForm) (output interface{}, err error) {
 	ctx, cancel := context.WithTimeout(ctx, u.contextTimeOut)
 	defer cancel()

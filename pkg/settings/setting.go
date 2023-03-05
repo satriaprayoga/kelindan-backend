@@ -52,10 +52,11 @@ type RedisDB struct {
 }
 
 type FileConfig struct {
-	Server   *Server   `mapstructure:"server"`
-	App      *App      `mapstructure:"app"`
-	Database *Database `mapstructure:"database"`
-	RedisDB  *RedisDB  `mapstructure:"redisdb"`
+	JWTExpired int       `mapstructure:"expire_jwt"`
+	Server     *Server   `mapstructure:"server"`
+	App        *App      `mapstructure:"app"`
+	Database   *Database `mapstructure:"database"`
+	RedisDB    *RedisDB  `mapstructure:"redisdb"`
 }
 
 var AppConfigSetting = &FileConfig{}

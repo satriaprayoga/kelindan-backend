@@ -9,6 +9,7 @@ import (
 	"kelindan/pkg/redisdb"
 	"kelindan/pkg/settings"
 	"kelindan/pkg/utils"
+	"strconv"
 	"time"
 )
 
@@ -72,4 +73,73 @@ func (u *useAuth) Login(ctx context.Context, dataLogin *models.LoginForm) (outpu
 	}
 
 	return response, nil
+}
+
+func (u *useAuth) Register(ctx context.Context, dataRegister models.RegisterForm) (output interface{}, err error) {
+	ctx, cancel := context.WithTimeout(ctx, u.contextTimeOut)
+	defer cancel()
+
+	var User models.KUser
+
+	CekData, err := u.repoKUser.GetByAccount(dataRegister.Account, dataRegister.UserType)
+
+	if CekData.Email == dataRegister.Account {
+		if CekData.IsActive {
+			return output, errors.New("email sudah terdaftar")
+		}
+	}
+
+	if dataRegister.Passwd != dataRegister.ConfirmPasswd {
+		return output, errors.New("password dan confirm password harus sama")
+	}
+
+	User.Name = dataRegister.Name
+	User.Password, _ = utils.Hash(dataRegister.Passwd)
+	User.IsActive = false
+	User.Email = dataRegister.Account
+	User.UserType = dataRegister.UserType
+
+	if CekData.UserID > 0 && !CekData.IsActive {
+		CekData.Name = User.Name
+		CekData.Password = User.Password
+		CekData.UserType = User.UserType
+		CekData.IsActive = User.IsActive
+		CekData.Email = User.Email
+
+		err = u.repoKUser.Update(CekData.UserID, CekData)
+		if err != nil {
+			return output, nil
+		}
+	} else {
+		User.UserEdit = dataRegister.Name
+		User.UserInput = dataRegister.Name
+		err = u.repoKUser.Create(&User)
+		if err != nil {
+			return output, err
+		}
+		mUser := map[string]interface{}{
+			"user_input": strconv.Itoa(User.UserID),
+			"user_edit":  strconv.Itoa(User.UserID),
+		}
+		err = u.repoKUser.Update(User.UserID, mUser)
+		if err != nil {
+			return output, err
+		}
+	}
+
+	GenCode := utils.GenerateNumber(4)
+	if CekData.UserID > 0 {
+		redisdb.TruncateList(dataRegister.Account + "_Register")
+	}
+
+	err = redisdb.AddSession(dataRegister.Account+"_Register", GenCode, 24*time.Hour)
+	if err != nil {
+		return output, err
+	}
+	out := map[string]interface{}{
+		"otp":     GenCode,
+		"account": User.Email,
+	}
+	return out, nil
+
 }

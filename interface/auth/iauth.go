@@ -9,4 +9,5 @@ import (
 type Usecase interface {
 	Logout(ctx context.Context, Claims utils.Claims, Token string) (err error)
 	Login(ctx context.Context, dataLogin *models.LoginForm) (output interface{}, err error)
+	Register(ctx context.Context, dataRegister models.RegisterForm) (output interface{}, err error)
 }

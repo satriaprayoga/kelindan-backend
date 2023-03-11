@@ -3,9 +3,11 @@ package utils
 import (
 	"encoding/binary"
 	"encoding/json"
+	"fmt"
 	"math"
 	"math/rand"
 	"regexp"
+	"strings"
 	"time"
 )
 
@@ -14,6 +16,9 @@ const (
 	WIB string = "Asia/Jakarta"
 	// UTC :
 	UTC string = "UTC"
+
+	ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+	NUMBER   = "0123456789"
 )
 
 // GetTimeNow :
@@ -49,6 +54,36 @@ func GenerateNumber(n int) string {
 		b[i] = letterRunes[rand.Intn(len(letterRunes))]
 	}
 	return string(b)
+}
+
+func GenerateString(n int) string {
+	var sb strings.Builder
+	k := len(ALPHABET)
+	for i := 0; i < n; i++ {
+		c := ALPHABET[rand.Intn(k)]
+		sb.WriteByte(c)
+	}
+	return sb.String()
+}
+
+func RandomName() string {
+	return fmt.Sprintf("%s %s", GenerateString(5), GenerateString(6))
+}
+
+func RandomUserName() string {
+	return fmt.Sprint(GenerateString(5))
+}
+
+func RandomPassword() string {
+	return fmt.Sprint(GenerateString(5))
+}
+
+func RandomPhone() string {
+	return fmt.Sprintf("+%s%s", GenerateNumber(2), GenerateNumber(8))
+}
+
+func RandomEmail() string {
+	return fmt.Sprintf("%s@mail.com", GenerateString(6))
 }
 
 func Float64frombytes(bytes []byte) float64 {

@@ -20,10 +20,10 @@ stop: postgres-stop redis-stop
 container: postgres redis
 
 main: 
-	@go run main.go
+	@go run ./cmd/main.go
 
 testing:
-	@go test -v -cover .
+	@go test -v -cover ./...
 
 run: postgres redis main
 

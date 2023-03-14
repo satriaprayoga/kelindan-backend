@@ -1,9 +1,0 @@
-[INFO][(*AuthCntrl)][auth_cntrl.go:68]2023/03/06 22:06:40 {"name":"Marbun","account":"gilsatpray@gmail.com","pwd":"asdqwe123","confirm_pwd":"asd","user_type":"user"}
-[ERROR][Resp][response.go:48]2023/03/06 22:06:40 {"message":"password dan confirm password harus sama","data":null}
-[INFO][(*AuthCntrl)][auth_cntrl.go:68]2023/03/06 22:13:51 {"name":"Marbun","account":"gilsatpray@gmail.com","pwd":"asdqwe123","confirm_pwd":"asdqwe123","user_type":"user"}
-[QUERY][(*repoKUser)][k_user_repo.go:106]2023/03/06 22:13:51 &{0xc0001906c0 <nil> 1 0xc00043a000 0}
-[QUERY][(*repoKUser)][k_user_repo.go:120]2023/03/06 22:13:51 &{0xc0001906c0 <nil> 1 0xc00043a380 0}
-[INFO][Resp][response.go:37]2023/03/06 22:13:51 {"message":"Ok","data":{"account":"gilsatpray@gmail.com","otp":"3221"}}
-[INFO][(*AuthCntrl)][auth_cntrl.go:68]2023/03/06 22:14:07 {"name":"Marbun","account":"gilsatpray@gmail.com","pwd":"asdqwe123","confirm_pwd":"asdqwe123","user_type":"user"}
-[QUERY][(*repoKUser)][k_user_repo.go:120]2023/03/06 22:14:07 &{0xc0001906c0 <nil> 1 0xc000374e00 0}
-[INFO][Resp][response.go:37]2023/03/06 22:14:07 {"message":"Ok","data":{"account":"gilsatpray@gmail.com","otp":"0416"}}
